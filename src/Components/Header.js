@@ -1,40 +1,24 @@
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-
+import { Button, Container, Form, Nav, Navbar, NavDropdown, Offcanvas } from 'react-bootstrap';
 import { BiMenu } from 'react-icons/bi';
 
 import logo from "./Images/tigeenlogo.png"
 
-const Header = () => {
+const Header = ({ logoPosition, color, leftdrawer, rightdrawer, showtabs }) => {
+
     return (
         <>
-            <Navbar bg="info" expand="false" className="p-3">
-                {/* <Container fluid className=''> */}
-                <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} style={{ border: "0px" }} ><BiMenu style={{ color: "white", fontSize: "2rem " }} /></Navbar.Toggle>
+            <Navbar bg="" expand="false" className="p-3" style={{ display: 'flex', flexWrap: "row", background: `${color}` }}>
+                {leftdrawer && <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} style={{ border: "0px" }} ><BiMenu style={{ color: "white", fontSize: "2rem " }} /></Navbar.Toggle>}
 
-
-                <Nav className="me-auto my-2 my-lg ">
-                    <Container fluid className="d-flex justify-content-end border" style={{ width: "100%" }}>
-                        <Navbar.Brand href="#">
+                <Nav className="me-auto" style={{ width: "90%" }}>
+                    <Container fluid className={`d-flex justify-content-${logoPosition}`}>
+                        <Navbar.Brand href="#" >
                             <img src={logo} width="180" height="30" className="d-inline-block align-top" alt="tigeenlogo logo" />
                         </Navbar.Brand>
-
                     </Container>
                 </Nav>
 
-
-
-
-
-
-
-                <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} style={{ border: "0px" }} ><BiMenu style={{ color: "white", fontSize: "2rem " }} /></Navbar.Toggle>
-
+                {rightdrawer && <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} style={{ border: "0px" }} ><BiMenu style={{ color: "white", fontSize: "2rem " }} /></Navbar.Toggle>}
                 <Navbar.Offcanvas id={`offcanvasNavbar-expand-lg`} aria-labelledby={`offcanvasNavbarLabel-expand-lg`} placement="start" >
                     <Offcanvas.Header closeButton>
                         <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
@@ -70,8 +54,15 @@ const Header = () => {
                         </Form>
                     </Offcanvas.Body>
                 </Navbar.Offcanvas>
-                {/* </Container> */}
             </Navbar>
+
+
+            {showtabs && <Navbar bg="" expand="false" className=" d-flex justify-content-start" style={{ background: `${color}` }}>
+                <Nav.Link className='mx-2 tabtext' style={{ color: "white", fontWeight: "500" }}>TAB ONE</Nav.Link>
+                <Nav.Link className='mx-2 tabtext' style={{ color: "white", fontWeight: "500" }}>TAB TWO</Nav.Link>
+                <Nav.Link className='mx-2 tabtext' style={{ color: "white", fontWeight: "500" }}>TAB THREE</Nav.Link>
+            </Navbar>}
+
         </>
     );
 }
